@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #apps
     'frontend',
+    'myauth.apps.MyauthConfig',
+    'profiles.apps.ProfilesConfig',
     'rest_framework',
 ]
 
@@ -127,6 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # REST_FRAMEWORK = {
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPugination',
+#     'DEFAULT_PAGINATION_CLASSES': 'rest_framework.pagination.PageNumberPugination',
 #     'PAGE_SIZE': 10,
+#
 # }
