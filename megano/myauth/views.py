@@ -3,16 +3,17 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import Group, User
 
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from myauth.serializers import UserSerializer
-from profiles.models import UserProfile
+from profiles.models import UserProfile, UserAvatar
 
 
 class UserLoginApiView(APIView):
-    """Аутентификация пользователя"""
+    """Аутентификация пользователя."""
 
     def post(self, request: Request) -> Response:
 
@@ -30,7 +31,9 @@ class UserLoginApiView(APIView):
 
 
 class UserLogoutApiView(APIView):
-    """Выход пользователя из учетной записи"""
+    """Выход пользователя из учетной записи."""
+
+    permission_classes = [IsAuthenticated]
 
     def post(self, request: Request) -> Response:
         logout(request)
@@ -38,7 +41,7 @@ class UserLogoutApiView(APIView):
 
 
 class UserRegisterApiView(APIView):
-    """Регистрация нового пользователя"""
+    """Регистрация нового пользователя."""
 
     def post(self, request: Request) -> Response:
         serialized = UserSerializer(data=request.data)  # десериализация данных
@@ -50,9 +53,11 @@ class UserRegisterApiView(APIView):
 
             # создание нового пользователя
             user = User.objects.create(password=password, username=username, first_name=first_name)
+
             user.set_password(password)  # шифрование пароля
 
-            UserProfile.objects.create(user=user)  # создание профиля пользователя
+            avatar = UserAvatar.objects.create(user=user)  # создание поля для аватара пользователя
+            UserProfile.objects.create(user=user, avatar=avatar)  # создание профиля пользователя
 
             group = Group.objects.get(name="authorized_user")  # добавление группы
             user.groups.add(group)
