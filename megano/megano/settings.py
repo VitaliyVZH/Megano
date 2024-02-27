@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'frontend',
     'myauth.apps.MyauthConfig',
     'profiles.apps.ProfilesConfig',
+    'product.apps.ProductConfig',
     'rest_framework',
     'debug_toolbar',
 
@@ -140,8 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASSES': 'rest_framework.pagination.PageNumberPugination',
-    'PAGE_SIZE': 10,
+    # 'DEFAULT_PAGINATION_CLASSES': 'rest_framework.pagination.PageNumberPugination',
+    # 'PAGE_SIZE': 1,
     # 'DEFAULT_PERMISSION_CLASSES': [
     #         'rest_framework.permissions.IsAuthenticated',
     #     ]

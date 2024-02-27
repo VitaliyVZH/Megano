@@ -13,8 +13,11 @@ class UserProfile(models.Model):
     fullName = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
     email = models.EmailField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     avatar = models.OneToOneField("UserAvatar", on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return f"User name: {self.user.username}, profile #{self.pk}"
 
 
 class UserAvatar(models.Model):
