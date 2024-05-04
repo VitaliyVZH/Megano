@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db.models import Avg
 from django.utils.safestring import mark_safe
 
-from product.models import Product, Category, Reviews, Specifications, ProductImage
+from product.models import Product, Category, Reviews, Specifications, ProductImage, Tag
 
 
 class ReviewsProductInline(admin.TabularInline):
@@ -30,12 +30,17 @@ class ImageProductInline(admin.TabularInline):
     model = ProductImage
 
     fields = "alt", "src",
-    extra = 1
+    extra = 0
 
     def get_image(self, obj):
-        # if not obj.avatar.src:
-        #     return f"No image"
         return mark_safe(f'<img src={obj.avatar.src.url}>')
+
+
+class TagProductInline(admin.TabularInline):
+    model = Tag.products.through
+    list_display = "pk", "name"
+
+    extra = 1
 
 
 @admin.register(Product)
@@ -49,6 +54,7 @@ class ProductAdmin(admin.ModelAdmin):
         SpecificationsInline,
         ReviewsProductInline,
         ImageProductInline,
+        TagProductInline,
     ]
 
     # отображаемые поля модели Product в общем списке
@@ -60,13 +66,14 @@ class ProductAdmin(admin.ModelAdmin):
         "date",
         "title",
         "description",
-        "fullDescription",
+        "short_full_desc",
         "freeDelivery",
-        "avg_products_rating",
+        "average_product_rating",
+        "preview"
 
     ]
 
-    list_display_links = "pk", "title"
+    list_display_links = "pk", "title", "category",  "preview"
     ordering = "pk",
 
     # поля, которые отображаются в карточке товара
@@ -78,7 +85,10 @@ class ProductAdmin(admin.ModelAdmin):
         "description",
         "fullDescription",
         "freeDelivery",
+        "preview"
     ]
+
+    readonly_fields = ["preview"]
 
     # date_hierarchy добавляет навигацию по дате в админ панели товаров
     date_hierarchy = "date"
@@ -89,8 +99,24 @@ class ProductAdmin(admin.ModelAdmin):
     # кол-во товаров отображенных на вкладке Products
     list_per_page = 20
 
+    def short_full_desc(self, obj: Product) -> str:
+        if obj.fullDescription and len(obj.fullDescription) > 50:
+            return "".join([obj.fullDescription[:50], "..."])
+        return obj.fullDescription
 
-    def avg_products_rating(self, obj: Product):
+    def preview(self, obj):
+        """
+        При наличии фотографии, функция возвращает HTML код, что позволяет отобразить не путь к фото,
+        а саму фотографию.
+        """
+
+        path = obj.images.get(product=obj).src
+        if path:
+            return mark_safe(f'<img src="{path.url}" width="60" height="60"')
+        else:
+            return "Нет фото"
+
+    def average_product_rating(self, obj: Product):
         """Функция возвращает средний рейтинг товара"""
 
         average_rating = Reviews.objects.filter(product=obj).aggregate(Avg("rate"))["rate__avg"]
@@ -100,25 +126,66 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProductsInline(admin.TabularInline):
-    model = Product
+    """
+    ProductsInline добавляется в список inlines класса CategoryAdmin для отображения в админ панели,
+    в КАТЕГОРИЯХ связанных с этими категоряими товаров.
+    """
 
-    extra = 1
+    model = Product
+    extra = 0  # кол-во форм для создания нового товара
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    """Класс CategoryAdmin реализует в админ панели КАТЕГОРИИ товаров."""
+
     inlines = [
         ProductsInline,
     ]
-    list_display = "pk", "name",
-    list_display_links = "pk", "name",
+
+    list_display = "pk", "title", "preview"
+    list_display_links = "pk", "title"
+    ordering = "pk",
+    readonly_fields = ["preview"]
+
+    def preview(self, obj):
+        """
+        При наличии фотографии, функция возвращает HTML код, что позволяет отобразить не путь к фото,
+        а саму фотографию.
+        """
+
+        if obj.image != "1":
+            return mark_safe(f'<img src={obj.image.url} width="60" height="60"')
+        else:
+            return "Нет фото"
 
 
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
     """Класс ReviewsAdmin реализует в админ панели доступ к отзывам о товарах"""
 
-    list_display = "product", "author", "text", "rate", "date",
+    list_display = "pk", "product", "author", "review", "rate", "date",
 
     # list_per_page устанавливает кол-во отображаемых отзывов в админ панели
     list_per_page = 20
+
+    def review(self, obj):
+        if obj.text and len(obj.text) > 50:
+            return "".join([obj.text[:50], "..."])
+        return obj.text
+
+
+class TagProductsInline(admin.TabularInline):
+    model = Tag.products.through
+    extra = 1
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+
+    inlines = [
+        TagProductsInline,
+    ]
+
+    list_display = "pk", "name",
+    list_display_links = "pk", "name"

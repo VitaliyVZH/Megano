@@ -26,6 +26,7 @@ urlpatterns = [
     path("api/", include("myauth.urls")),
     path("api/", include("profiles.urls")),
     path("api/", include("product.urls")),
+    path("api/", include("catalog.urls")),
 ]
 
 urlpatterns += (

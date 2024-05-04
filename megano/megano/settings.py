@@ -38,14 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #apps
+    # front apps
     'frontend',
+
+    # my apps
     'myauth.apps.MyauthConfig',
     'profiles.apps.ProfilesConfig',
     'product.apps.ProductConfig',
+    'catalog.apps.CatalogConfig',
+
+    # config apps
     'rest_framework',
     'debug_toolbar',
-
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -120,10 +125,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Monaco'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
@@ -141,8 +146,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PAGINATION_CLASSES': 'rest_framework.pagination.PageNumberPugination',
-    # 'PAGE_SIZE': 1,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
     # 'DEFAULT_PERMISSION_CLASSES': [
     #         'rest_framework.permissions.IsAuthenticated',
     #     ]

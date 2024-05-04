@@ -26,6 +26,7 @@ class UserAvatar(models.Model):
     src = models.ImageField(null=True, blank=True, upload_to=path_avatar)
     alt = models.CharField(blank=True, max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         """
