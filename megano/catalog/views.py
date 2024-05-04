@@ -85,8 +85,39 @@ class CatalogAPIView(ListAPIView):
 
 
 class CategoriesAPIView(APIView):
+    """View Категорий товаров"""
 
     def get(self, request: Request) -> Response:
         categories = Category.objects.filter(parent_category=None)
         serializer = CategoriesSerializer(categories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ProductsPopularListAPIView(ListAPIView):
+    """Представление реализует отображение популярных товаров"""
+
+    number_displayed_products = 8
+    queryset = Product.objects.order_by("pk")[:number_displayed_products]
+    serializer_class = CatalogSerializer
+
+
+class ProductsLimitedListAPIView(ListAPIView):
+    """ProductsLimitedListAPIView реализует отображение лимитированных товаров"""
+
+    number_displayed_products = 16
+    queryset = Product.objects.order_by("pk").filter(count__lte=5)[:number_displayed_products]
+    serializer_class = CatalogSerializer
+
+
+class BannersListAPIView(ListAPIView):
+    """BannersListAPIView реализует отображение лимитированных товаров"""
+
+    queryset = Product.objects.all()
+    serializer_class = CatalogSerializer
+
+
+class SalesListAPIView(ListAPIView):
+    """BannersListAPIView реализует отображение лимитированных товаров"""
+
+    queryset = Product.objects.all()
+    serializer_class = CatalogSerializer

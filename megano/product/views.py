@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from product.models import Category, Tag
+from product.models import Category, Tag, Product
 from product.serializers import ProductSerializer, TagSerializer
 
 
@@ -20,3 +20,5 @@ class ProductAPIView(APIView):
 class TagsListAPIView(ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+
+
