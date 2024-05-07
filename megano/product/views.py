@@ -1,11 +1,11 @@
 from rest_framework import status
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from product.models import Tag, Product, Reviews
+from product.models import Tag, Product
 from product.serializers import ProductSerializer, TagSerializer, ProductDetailSerializer, ReviewSerializer
 
 
@@ -24,9 +24,9 @@ class ProductDetailAPIView(RetrieveAPIView):
     serializer_class = ProductDetailSerializer
 
 
-# class ReviewProductAPIView(CreateAPIView):
-#     queryset = Product.objects.all()
-#     serializer_class = ReviewSerializer
+class ReviewProductAPIView(CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ReviewSerializer
 
 
 class TagsListAPIView(ListAPIView):
