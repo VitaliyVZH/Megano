@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'product.apps.ProductConfig',
     'catalog.apps.CatalogConfig',
+    'order.apps.OrderConfig',
 
     # config apps
     'rest_framework',

@@ -55,7 +55,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField()
 
     class Meta:
-        print("ReviewSerializer")
         model = Reviews
         fields = "author", "email", "text", "rate", "date"
 
