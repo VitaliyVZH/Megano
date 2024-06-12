@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'product.apps.ProductConfig',
     'catalog.apps.CatalogConfig',
+    'basket.apps.BasketConfig',
     'order.apps.OrderConfig',
 
     # config apps
@@ -53,6 +54,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_filters',
 ]
+
+BASKET_SESSION_ID = 'basket.apps.BasketConfig'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

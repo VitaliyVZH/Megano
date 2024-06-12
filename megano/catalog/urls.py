@@ -1,14 +1,13 @@
 from django.urls import path
 
-from catalog.views import CatalogAPIView, CategoriesAPIView, ProductsPopularListAPIView, ProductsLimitedListAPIView, \
-    BannersListAPIView, SalesListAPIView
-from product.views import ProductAPIView
+from catalog.views import CatalogListAPIView, CategoriesAPIView, ProductsPopularListAPIView, ProductsLimitedListAPIView, \
+    BannersListAPIView
 
 app_name = "catalog"
 
 
 urlpatterns = [
-    path("catalog/", CatalogAPIView.as_view()),
+    path("catalog/", CatalogListAPIView.as_view()),
     path("categories/", CategoriesAPIView.as_view()),
     path("products/popular/", ProductsPopularListAPIView.as_view()),
     path("products/limited/", ProductsLimitedListAPIView.as_view()),
