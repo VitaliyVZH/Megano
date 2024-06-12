@@ -5,33 +5,6 @@ from rest_framework import serializers
 from product.models import Product, ProductImage, Tag, Reviews, Specifications
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    """Сериализатор ProductSerializer возвращает данные (фото товара) в JSON формате."""
-
-    images = ProductImage()
-    tags = Tag()
-    reviews = Reviews()
-
-    class Meta:
-        model = Product
-        fields = [
-            "pk",
-            "category",
-            "price",
-            "count",
-            "date",
-            "title",
-            "description",
-            "fullDescription",
-            "freeDelivery",
-            "images",
-            "tags",
-            "reviews",
-            "specifications",
-            "rating"
-        ]
-
-
 class ImageProductSerializer(serializers.ModelSerializer):
     """Сериализатор ImageProductSerializer возвращает данные (фото товара) в JSON формате."""
 
@@ -51,15 +24,11 @@ class TagSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     """Сериализатор ReviewSerializer возвращает данные (отзывы о товаре) в JSON формате."""
 
-    author = serializers.SerializerMethodField()
-    date = serializers.SerializerMethodField()
+    date = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Reviews
         fields = "author", "email", "text", "rate", "date"
-
-    def get_author(self, obj: Reviews) -> str:
-        return obj.author.username
 
     def get_date(self, obj: Reviews) -> str:
         return obj.date.strftime('%Y-%m-%d %I:%M')

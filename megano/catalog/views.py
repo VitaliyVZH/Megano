@@ -13,10 +13,11 @@ from product.models import Product, Category
 
 class CatalogAPIViewPaginator(PageNumberPagination):
     """CatalogAPIViewPaginator - класс для настройки пагинации"""
+
     page_size = 3  # кол-во объектов на странице
 
 
-class CatalogAPIView(ListAPIView):
+class CatalogListAPIView(ListAPIView):
     """
     CatalogAPIView отдаёт данные о товарах, сортирует и фильтрует товары по параметрам пользователя
     """

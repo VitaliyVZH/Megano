@@ -164,7 +164,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ReviewsAdmin(admin.ModelAdmin):
     """Класс ReviewsAdmin реализует в админ панели доступ к отзывам о товарах"""
 
-    list_display = "pk", "product", "author", "review", "rate", "date",
+    list_display = "pk", "product", "reviewer", "review", "rate", "date",
 
     # list_per_page устанавливает кол-во отображаемых отзывов в админ панели
     list_per_page = 20

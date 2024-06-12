@@ -51,7 +51,8 @@ class Tag(models.Model):
 class Reviews(models.Model):
     """Класс Reviews реализует модель (таблицу) для отзывов товара"""
 
-    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    reviewer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    author = models.CharField(max_length=30)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="reviews")
     email = models.EmailField()
     text = models.TextField(blank=True, max_length=500)
