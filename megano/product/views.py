@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from product.models import Tag, Product, Reviews
@@ -24,30 +24,43 @@ class ReviewProductAPIView(ListAPIView):
 
     queryset = Product.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]  # проверка аутентификации пользователя
 
     def post(self, request, *args, **kwargs):
+        """Добавляется новый отзыв на товар."""
+
         # передаём данные в сериализатор для проверки на валидность
         serializer = ReviewSerializer(data=request.data)
         # если они валидные
         if serializer.is_valid():
+            print("IS VALID")
             # получим объект товара для сохранения отзыва
             product = Product.objects.get(pk=kwargs["pk"])
-            # сохраняем отзыв, передавая нужные поля
-            Reviews.objects.create(
-                reviewer=self.request.user,
-                author=self.request.user.username,
-                product=product,
-                email=self.request.user.email,
-                text=serializer.validated_data["text"],
-                rate=serializer.validated_data["rate"],
-                date=datetime.now()
-            )
-            # получаем список отзывов на один товар
-            reviews_list = Reviews.objects.filter(product=product)
-            # сериализация данных
-            serializer = ReviewSerializer(reviews_list, many=True)
-            # отдаём данные в битовой последовательности со статусом 200
-            return Response(serializer.data, status=status.HTTP_200_OK)
+
+            # получаем email из профиля пользователя
+            email = self.request.user.profile.email
+            if not email:
+                # если его нет, получаем email из введённых данных
+                email = serializer.validated_data["email"]
+            if email:
+                # если email есть, сохраняем отзыв передавая нужные поля
+                Reviews.objects.create(
+                    reviewer=self.request.user,
+                    author=self.request.user.username,
+                    product=product,
+                    email=email,
+                    text=serializer.validated_data["text"],
+                    rate=serializer.validated_data["rate"],
+                    date=datetime.now()
+                )
+                # получаем список отзывов на один товар
+                reviews_list = Reviews.objects.filter(product=product)
+                # сериализация данных
+                serializer = ReviewSerializer(reviews_list, many=True)
+                # отдаём данные в битовой последовательности со статусом 200
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class TagsListAPIView(ListAPIView):
