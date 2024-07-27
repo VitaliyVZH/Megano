@@ -2,8 +2,6 @@
 
 from django.conf import settings
 
-from product.models import Product
-
 
 class Cart(object):
     """Класс Cart реализует функционал корзины"""
@@ -67,7 +65,7 @@ class Cart(object):
         for item in self.cart:
 
             yield {
-                "pk_product": item,
+                "product_pk": item,
                 "quantity": self.cart[item]["quantity"],
             }
 

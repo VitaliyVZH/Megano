@@ -1,52 +1,7 @@
 
-import datetime
-
 from rest_framework import serializers
 
-from product.models import Product, Category
-from product.serializers import ImageProductSerializer, TagSerializer
-
-
-class CatalogSerializer(serializers.ModelSerializer):
-    """Сериализатор обрабатывает данные модели Product."""
-
-    date = serializers.SerializerMethodField()
-    images = ImageProductSerializer(many=True)
-    tags = TagSerializer(many=True)
-    reviews = serializers.SerializerMethodField()
-    rating = serializers.SerializerMethodField()
-    # count = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Product
-
-        fields = [
-            "id",
-            "category",
-            "price",
-            "count",
-            "date",
-            "title",
-            "description",
-            "freeDelivery",
-            "images",
-            "tags",
-            "reviews",
-            "rating"
-        ]
-
-    def get_date(self, obj: Product) -> str:
-        tz = datetime.timezone(datetime.timedelta(hours=1), name="Central European Standard Time")
-        return obj.date.astimezone(tz).strftime('%a %b %d %Y %X GMT%z (%Z)')
-
-    def get_reviews(self, obj: Product):
-        return obj.reviews.count()
-
-    def get_rating(self, obj):
-        rate = [i.rate for i in obj.reviews.all()]
-        if rate:
-            return round(sum(rate) / len(rate), 1)
-        return 0.0
+from product.models import Category
 
 
 class CategoriesSerializer(serializers.ModelSerializer):

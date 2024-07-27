@@ -7,8 +7,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from catalog.serializers import CatalogSerializer, CategoriesSerializer
+from catalog.serializers import CategoriesSerializer
 from product.models import Product, Category
+from product.serializers import ProductSerializer
 
 
 class CatalogAPIViewPaginator(PageNumberPagination):
@@ -22,7 +23,7 @@ class CatalogListAPIView(ListAPIView):
     CatalogAPIView отдаёт данные о товарах, сортирует и фильтрует товары по параметрам пользователя
     """
     queryset = Product.objects.all()
-    serializer_class = CatalogSerializer
+    serializer_class = ProductSerializer
     pagination_class = CatalogAPIViewPaginator
 
     def get_queryset(self):
@@ -99,7 +100,7 @@ class ProductsPopularListAPIView(ListAPIView):
 
     number_displayed_products = 8
     queryset = Product.objects.order_by("pk")[:number_displayed_products]
-    serializer_class = CatalogSerializer
+    serializer_class = ProductSerializer
 
 
 class ProductsLimitedListAPIView(ListAPIView):
@@ -107,18 +108,18 @@ class ProductsLimitedListAPIView(ListAPIView):
 
     number_displayed_products = 16
     queryset = Product.objects.order_by("pk").filter(count__lte=5)[:number_displayed_products]
-    serializer_class = CatalogSerializer
+    serializer_class = ProductSerializer
 
 
 class BannersListAPIView(ListAPIView):
     """BannersListAPIView реализует отображение лимитированных товаров"""
 
     queryset = Product.objects.all()
-    serializer_class = CatalogSerializer
+    serializer_class = ProductSerializer
 
 
 class SalesListAPIView(ListAPIView):
     """BannersListAPIView реализует отображение лимитированных товаров"""
 
     queryset = Product.objects.all()
-    serializer_class = CatalogSerializer
+    serializer_class = ProductSerializer
