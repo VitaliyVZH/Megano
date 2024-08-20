@@ -3,8 +3,6 @@ import json
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from profiles.models import UserProfile
-
 
 class UserSerializer(serializers.ModelSerializer):
     """Сериализатор для регистрации и аутентификации пользователя"""
@@ -22,10 +20,3 @@ class UserSerializer(serializers.ModelSerializer):
             del cleaned_data["name"]
             return cleaned_data
         return cleaned_data
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = UserProfile
-        fields = "",

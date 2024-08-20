@@ -14,7 +14,6 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    avatar = models.OneToOneField("UserAvatar", on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return f"User name: {self.user.username}, profile #{self.pk}"
@@ -26,7 +25,7 @@ class UserAvatar(models.Model):
     src = models.ImageField(null=True, blank=True, upload_to=path_avatar)
     alt = models.CharField(blank=True, max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         """
