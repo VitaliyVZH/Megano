@@ -50,7 +50,6 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
     reviews = ReviewSerializer(many=True)
     specifications = serializers.SerializerMethodField()
-    rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -88,10 +87,36 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             }
         ]
 
-    def get_rating(self, obj: Product) -> float:
-        """Функция get_rating возвращает среднюю оценку товара."""
 
-        rate = [rev.rate for rev in obj.reviews.all()]
-        if rate:
-            return round(sum(rate) / len(rate), 1)
-        return 0.0
+class ProductSerializer(serializers.ModelSerializer):
+    """Сериализатор обрабатывает данные модели Product."""
+
+    date = serializers.SerializerMethodField()
+    images = ImageProductSerializer(many=True)
+    tags = TagSerializer(many=True)
+    reviews = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+
+        fields = [
+            "id",
+            "category",
+            "price",
+            "count",
+            "date",
+            "title",
+            "description",
+            "freeDelivery",
+            "images",
+            "tags",
+            "reviews",
+            "rating"
+        ]
+
+    def get_date(self, obj: Product) -> str:
+        tz = datetime.timezone(datetime.timedelta(hours=1), name="Central European Standard Time")
+        return obj.date.astimezone(tz).strftime('%a %b %d %Y %X GMT%z (%Z)')
+
+    def get_reviews(self, obj: Product):
+        return obj.reviews.count()

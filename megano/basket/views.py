@@ -4,9 +4,9 @@ from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 
 from basket.basket import Cart
-from catalog.serializers import CatalogSerializer
 
 from product.models import Product
+from product.serializers import ProductSerializer
 
 
 def creat_basket_products(user_basket: Cart) -> list[Cart]:
@@ -17,12 +17,12 @@ def creat_basket_products(user_basket: Cart) -> list[Cart]:
     # перебираем объекты находящиеся в классе Cart
     for prod_value in user_basket:
         # в переменной сохраняем нужный нам товар
-        product = Product.objects.all().get(pk=prod_value["pk_product"])
+        product = Product.objects.all().get(pk=prod_value["product_pk"])
         # указываем, какое кол-во товара
         product.count = prod_value["quantity"]
-        if product.count > 0:
-            # указываем общую стоимость позиции товара исходя из кол-ва товаров
-            product.price = product.count * product.price
+        # if product.count > 0:
+        #     # указываем общую стоимость позиции товара исходя из кол-ва товаров
+        #     product.price = product.count * product.price
 
         # добавляем товар в список
         basket_products.append(product)
@@ -34,7 +34,7 @@ class BasketAPIView(ListCreateAPIView):
     """Класс BasketAPIView отдаёт данные для отображения информации о корзине пользователя."""
 
     queryset = Product.objects.all()
-    serializer_class = CatalogSerializer
+    serializer_class = ProductSerializer
 
     def post(self, request, *args, **kwargs):
         return self.list(request)
@@ -67,6 +67,6 @@ class BasketAPIView(ListCreateAPIView):
             # находится в корзине пользователя, вызываем функцию для удаления одной единицы товара
             user_basket.products_cut_count(data["id"])
 
-        serializer = CatalogSerializer(creat_basket_products(user_basket), many=True)
+        serializer = ProductSerializer(creat_basket_products(user_basket), many=True)
 
         return Response(serializer.data)

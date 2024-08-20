@@ -1,7 +1,8 @@
 from datetime import datetime
 
+from django.db.models import Avg
 from rest_framework import status
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -30,10 +31,11 @@ class ReviewProductAPIView(ListAPIView):
         """Добавляется новый отзыв на товар."""
 
         # передаём данные в сериализатор для проверки на валидность
+        print(request.data)
+
         serializer = ReviewSerializer(data=request.data)
         # если они валидные
         if serializer.is_valid():
-            print("IS VALID")
             # получим объект товара для сохранения отзыва
             product = Product.objects.get(pk=kwargs["pk"])
 
@@ -53,8 +55,14 @@ class ReviewProductAPIView(ListAPIView):
                     rate=serializer.validated_data["rate"],
                     date=datetime.now()
                 )
+
                 # получаем список отзывов на один товар
                 reviews_list = Reviews.objects.filter(product=product)
+
+                # пересчитываем средний рейтинг товара
+                product.rating = reviews_list.aggregate(Avg("rate"))["rate__avg"]
+                product.save()
+
                 # сериализация данных
                 serializer = ReviewSerializer(reviews_list, many=True)
                 # отдаём данные в битовой последовательности со статусом 200
