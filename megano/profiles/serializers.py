@@ -1,4 +1,3 @@
-import json
 
 from django.contrib.auth.models import User
 from rest_framework import serializers
@@ -20,11 +19,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
     обрабатывается вложенный сериализатор 'avatar'.
     """
 
-    avatar = UserAvatarSerializer()
+    avatar = serializers.SerializerMethodField()
 
     class Meta:
         model = UserProfile
         fields = "fullName", "phone", "email", "avatar"
+
+    def get_avatar(self, obj: UserProfile):
+        user_avatar = UserAvatar.objects.get(user_profile=obj)
+        serializer = UserAvatarSerializer(user_avatar)
+        return serializer.data
 
 
 class UserProfileUpdateSerializer(serializers.ModelSerializer):

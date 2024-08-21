@@ -46,7 +46,6 @@ class UserRegisterApiView(APIView):
     def post(self, request: Request) -> Response:
         serialized = UserSerializer(data=request.data)  # десериализация данных
         if serialized.is_valid():
-
             password = serialized.validated_data["password"]
             username = serialized.validated_data["username"]
             first_name = serialized.validated_data["first_name"]
@@ -55,9 +54,9 @@ class UserRegisterApiView(APIView):
             user = User.objects.create(password=password, username=username, first_name=first_name)
 
             user.set_password(password)  # шифрование пароля
+            user_profile = UserProfile.objects.create(user=user)  # создание профиля пользователя
+            avatar = UserAvatar.objects.create(user=user, user_profile=user_profile)  # создание поля для аватара пользователя
 
-            avatar = UserAvatar.objects.create(user=user)  # создание поля для аватара пользователя
-            UserProfile.objects.create(user=user, avatar=avatar)  # создание профиля пользователя
 
             group = Group.objects.get(name="authorized_user")  # добавление группы
             user.groups.add(group)

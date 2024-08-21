@@ -31,8 +31,11 @@ class UserProfileAPIView(APIView):
          - десериализация полученных данных;
          - проверка данных на валидность, в случае успеха, сохранение данных.
          """
-
-        serializer = UserProfileUpdateSerializer(data=request.data, instance=request.user.userprofile)
+        # print("!!!!!", request.user)
+        # user_profile = UserProfile.objects.get(user=request.user)
+        print(request.user.profile)
+        # print(request.data)
+        serializer = UserProfileUpdateSerializer(data=request.data, instance=request.user.profile)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
 
