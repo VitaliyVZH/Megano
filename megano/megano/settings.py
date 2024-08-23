@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'sale.apps.SaleConfig',
 
+
     # config apps
     'rest_framework',
     'debug_toolbar',

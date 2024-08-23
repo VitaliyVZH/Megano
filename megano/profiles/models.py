@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
 
     def __str__(self):
-        return f"User name: {self.user.username}, profile #{self.pk}"
+        return f"Profile: {self.user.username}, profile #{self.pk}"
 
 
 class UserAvatar(models.Model):

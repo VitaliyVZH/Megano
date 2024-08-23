@@ -30,10 +30,10 @@ class UserProfileAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         """Подгрузка связанных таблиц"""
 
-        return UserProfile.objects.prefetch_related("user", "avatar")
+        return UserProfile.objects.prefetch_related("user")
 
-    def get_avatar(self, obj):
-
-        if not obj.avatar.src:
+    def get_avatar(self, obj: UserProfile):
+        avatar = UserAvatar.objects.get(user_profile=obj)
+        if not avatar:
             return f"No avatar"
-        return mark_safe(f'<img src={obj.avatar.src.url}>')
+        return mark_safe(f'<img src={avatar.src.url}>')
