@@ -18,7 +18,7 @@ class ProductSaleListAPIViewPaginator(PageNumberPagination):
 class ProductSaleListAPIView(ListAPIView):
     """Класс получает данные по продуктам со скидками и отдаются ограниченными частями согласно пагинации."""
 
-    queryset = ProductSale.objects.all()
+    queryset = ProductSale.objects.all().order_by("id")
     serializer_class = ProductSaleSerializer
     pagination_class = ProductSaleListAPIViewPaginator
 

@@ -31,10 +31,7 @@ class UserProfileAPIView(APIView):
          - десериализация полученных данных;
          - проверка данных на валидность, в случае успеха, сохранение данных.
          """
-        # print("!!!!!", request.user)
-        # user_profile = UserProfile.objects.get(user=request.user)
-        print(request.user.profile)
-        # print(request.data)
+
         serializer = UserProfileUpdateSerializer(data=request.data, instance=request.user.profile)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -45,7 +42,7 @@ class UserProfileAPIView(APIView):
 
 
 class UserAvatarApiView(APIView):
-    """Класс реализует обновление аватара пользователя"""
+    """Класс реализует обновление аватара пользователя."""
 
     permission_classes = [IsAuthenticated]
 
@@ -64,16 +61,16 @@ class UserAvatarApiView(APIView):
 
 
 class UserPasswordAPIView(APIView):
-    """Класс реализует возможность изменения пароля"""
+    """Класс реализует возможность изменения пароля."""
 
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request) -> Response:
         """
         Метод POST проверяет полученные данные, если введённый пароль равен существующему,
-        а новый пароль соответствует требованиям, тогда новый пароль сохраняется
+        а новый пароль соответствует требованиям, тогда новый пароль сохраняется.
         """
-        
+
         serializer = UserPasswordSerializer(data=request.data, instance=request.user)
         if serializer.is_valid(raise_exception=True):
             password = serializer.validated_data["password"]
@@ -85,3 +82,4 @@ class UserPasswordAPIView(APIView):
                 user.save()
                 return Response(status=status.HTTP_200_OK)
 
+        return Response(status=status.HTTP_400_BAD_REQUEST)

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.db.models import Avg
 from rest_framework import status
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -18,21 +18,14 @@ class ProductDetailAPIView(RetrieveAPIView):
 
 
 class ReviewProductAPIView(ListAPIView):
-    """
-    ReviewProductAPIView возвращает данные об отзывах товара,
-    сохраняет новые отзывы о товаре.
-    """
-
     queryset = Product.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticated]  # проверка аутентификации пользователя
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         """Добавляется новый отзыв на товар."""
 
         # передаём данные в сериализатор для проверки на валидность
-        print(request.data)
-
         serializer = ReviewSerializer(data=request.data)
         # если они валидные
         if serializer.is_valid():

@@ -1,4 +1,3 @@
-from typing import OrderedDict
 
 from _decimal import Decimal
 from rest_framework import status
@@ -17,7 +16,6 @@ class OrderView(APIView):
     """OrderView отдаёт данные о заказе и создаёт новый заказ"""
 
     def post(self, request, *args, **kwargs) -> Response:
-        print("OrderView POST")
 
         # получаем корзину пользователя
         cart = Cart(request)
@@ -41,16 +39,12 @@ class OrderView(APIView):
 
 
 class OrderDetailsView(APIView):
+    """Класс обрабатывает детали заказа"""
 
     def get(self, request: Request, pk: int) -> Response:
-        print("OrderDetailsView GET")
         order = Order.objects.get(pk=pk)
-
         serializer = OrderDetailsSerializer(order)
-        print("order_data", serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs) -> Response:
-        print("OrderDetailsView POST")
-        print("request.data", request.data)
         return Response(request.data, status=status.HTTP_200_OK)

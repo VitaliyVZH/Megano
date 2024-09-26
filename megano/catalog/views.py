@@ -45,11 +45,16 @@ class CatalogListAPIView(ListAPIView):
         if param_filter.get("sortType") == "inc":
             symbol_order_by = '-'
 
+        freeDelivery = param_filter.get("filter[freeDelivery]")
+        if freeDelivery is not None:
+            self.queryset = self.queryset.filter(freeDelivery=freeDelivery)
+
         #  перезаписываем queryset эти же данные, только в отсортированном и отфильтрованном виде
         self.queryset = self.queryset.filter(
             price__gte=param_filter.get("filter[minPrice]"),  # price__gte сортирует данные от значения вкл-но и выше
             price__lte=param_filter.get("filter[maxPrice]"),  # price__lte сортирует данные от значения вкл-но и ниже
-            freeDelivery=param_filter.get("filter[freeDelivery]").capitalize(),
+            freeDelivery=freeDelivery,
+
         ).order_by(f'{symbol_order_by}{param_filter["sort"]}')
 
         # если в параметрах фильтрации, был введён параметр поиска по имени товара, в этом случае
@@ -59,6 +64,7 @@ class CatalogListAPIView(ListAPIView):
             self.queryset = self.queryset.filter(
                 title=param_filter["filter[name]"],
             )
+
             return self.queryset
 
         # переменная num_products хранит в себе кол-во отфильтрованных товаров

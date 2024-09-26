@@ -8,7 +8,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myauth.serializers import UserSerializer
+from myauth.serializers import UserSerializer, UserSignInSerializer
 from profiles.models import UserProfile, UserAvatar
 
 
@@ -16,10 +16,15 @@ class UserLoginApiView(APIView):
     """Аутентификация пользователя."""
 
     def post(self, request: Request) -> Response:
+        """
+        Функция POST десереализует данные, проверяет их на валидность и аутентифицирует пользователя,
+        если данные валидны.
+        """
 
-        serializer = UserSerializer(data=request.data)  # десереализация данных
+        serializer = UserSignInSerializer(data=request.data)  # десереализация данных
 
         if serializer.is_valid():  # если данные валидны ниже получим их
+
             username = serializer.validated_data["username"]
             password = serializer.validated_data["password"]
             user = authenticate(username=username, password=password)
@@ -36,6 +41,8 @@ class UserLogoutApiView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request) -> Response:
+        """Функция POST разлогинивает пользователя."""
+
         logout(request)
         return Response(status=status.HTTP_200_OK)
 
@@ -44,25 +51,28 @@ class UserRegisterApiView(APIView):
     """Регистрация нового пользователя."""
 
     def post(self, request: Request) -> Response:
-        serialized = UserSerializer(data=request.data)  # десериализация данных
-        if serialized.is_valid():
-            password = serialized.validated_data["password"]
-            username = serialized.validated_data["username"]
-            first_name = serialized.validated_data["first_name"]
+        """
+        Регистрация пользователя.
+        Функция POST десереализует данные, проверяет их на валидность и если данные валидны создаёт:
+          - пользователя;
+          - профиль пользователя;
+          - аватар;
+          - добавляет пользователя в группу;
+          - входит в аккаунт пользователя.
+        """
 
-            # создание нового пользователя
-            user = User.objects.create(password=password, username=username, first_name=first_name)
-
-            user.set_password(password)  # шифрование пароля
-            user_profile = UserProfile.objects.create(user=user)  # создание профиля пользователя
-            avatar = UserAvatar.objects.create(user=user, user_profile=user_profile)  # создание поля для аватара пользователя
-
-
-            group = Group.objects.get(name="authorized_user")  # добавление группы
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.create_user(
+                username=serializer.validated_data["username"],
+                first_name=serializer.validated_data["first_name"],
+                password=serializer.validated_data["password"]
+            )
+            user_profile = UserProfile.objects.create(user=user)
+            UserAvatar.objects.create(user=user, user_profile=user_profile)
+            group = Group.objects.get(name="authorized_user")
             user.groups.add(group)
             user.save()
-
-            login(request, user)  # вход в учетную запись
-
-            return Response(status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            login(request, user)
+            return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

@@ -7,7 +7,7 @@ app_name = "product"
 
 
 urlpatterns = [
-    path("product/<int:pk>/", ProductDetailAPIView.as_view()),
-    path("product/<int:pk>/reviews", ReviewProductAPIView.as_view()),
-    path("tags/", TagsListAPIView.as_view()),
+    path("product/<int:pk>/", ProductDetailAPIView.as_view(), name="product_details"),
+    path("product/<int:pk>/reviews", ReviewProductAPIView.as_view(), name="product_reviews"),
+    path("tags/", TagsListAPIView.as_view(), name="product_tags"),
 ]

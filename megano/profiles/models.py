@@ -33,8 +33,8 @@ class UserAvatar(models.Model):
         ранее сохранённого файла, если такой имеется, он удаляется и сохраняется добавленный файл.
         """
 
-        if self.src:
-            old_self = UserAvatar.objects.get(pk=self.pk)
-            if old_self.src and self.src != old_self.src:
+        if self.pk:
+            old_self = UserAvatar.objects.filter(pk=self.pk, user=self.user).first()
+            if old_self and self.src != old_self.src:
                 old_self.src.delete(False)
-        return super(UserAvatar, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)

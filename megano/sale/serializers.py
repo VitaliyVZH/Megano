@@ -18,6 +18,7 @@ class ProductSaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductSale
         fields = "id", "price", "salePrice", "title", "dateFrom", "dateTo", "images"
+        ordering = ['id']
 
     def get_id(self, obj: ProductSale) -> str:
         return f"{obj.product.pk}"

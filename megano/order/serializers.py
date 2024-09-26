@@ -1,4 +1,3 @@
-import json
 
 from rest_framework import serializers
 
@@ -8,7 +7,7 @@ from product.serializers import ProductSerializer
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(many=True)
+    product = ProductSerializer()
 
     class Meta:
         model = OrderItem
@@ -28,14 +27,26 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ["id", "createdAt", "fullName", "email", "phone", "deliveryType", "paymentType", "totalCost",
                   "status", "city", "address", "products"]
 
+    def get_products(self, obj: Order):
+        return [
+            {
+                "id": product.product.id,
+                "title": product.product.title,
+                "price": product.price,
+                "count": product.quantity,
+            }
+            for product in obj.products_in_order.all()
+        ]
+
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
+    createdAt = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S.%fZ", read_only=True)
     products = serializers.ModelSerializer(many=True)
 
     class Meta:
         model = Order
-        fields = "id", "createdAt", "fullName", "email", "phone", "deliveryType", "paymentType", "totalCost",\
-            "status", "city", "address", "products"
+        fields = ('id', 'createdAt', 'fullName', 'email', 'phone', 'deliveryType', 'paymentType', 'totalCost',
+                  'status', 'city', 'address', 'products')
 
     def to_representation(self, instance: Order):
         def changing_quantity_goods_order(order_product: Product, quantity: int):

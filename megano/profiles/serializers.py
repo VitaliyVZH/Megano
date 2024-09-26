@@ -53,13 +53,14 @@ class UserProfileUpdateSerializer(serializers.ModelSerializer):
 
 
 class UserPasswordSerializer(serializers.ModelSerializer):
-    newPassword = serializers.CharField()
+    newPassword = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
         model = User
         fields = "password", "newPassword"
 
     def to_internal_value(self, data):
+        data = data.copy()  # Создаём копию данных, чтобы избежать изменения оригинального QueryDict
         data["password"] = data["currentPassword"]
         del data["currentPassword"]
         return data
