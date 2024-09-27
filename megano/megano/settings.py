@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'basket.apps.BasketConfig',
     'order.apps.OrderConfig',
     'sale.apps.SaleConfig',
+    'payment.apps.PaymentConfig',
 
 
     # config apps
