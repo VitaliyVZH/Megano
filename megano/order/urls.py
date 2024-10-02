@@ -7,6 +7,7 @@ app_name = "order"
 
 urlpatterns = [
     path("orders", OrderView.as_view(), name="order"),
+    # path("order", OrderDetailsView.as_view()),
     path("order/<int:pk>", OrderDetailsView.as_view()),
     path("orders/<int:pk>", OrderDetailsView.as_view()),
 ]

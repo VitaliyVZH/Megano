@@ -5,7 +5,7 @@ from profiles.models import UserProfile
 
 
 class Payment(models.Model):
-    number = models.CharField(max_length=16)
+    number = models.CharField(max_length=20)
     name = models.CharField(max_length=20)
     month = models.CharField(max_length=2)
     year = models.CharField(max_length=4)
