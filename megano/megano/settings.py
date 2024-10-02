@@ -10,22 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from os import getenv
 from pathlib import Path
+import logging.config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+DATABASE_DIR = BASE_DIR / "database"
+DATABASE_DIR.mkdir(exist_ok=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=8=*-!wo1%wd8w8qn%a#unnh$6yu0e894c9-1fgzkkcnu7$e*u'
+SECRET_KEY = getenv(
+    "DJANGO_SECRET_KEY",
+    'django-insecure-=8=*-!wo1%wd8w8qn%a#unnh$6yu0e894c9-1fgzkkcnu7$e*u'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("DJANGO_DEBUG", 0) == 1
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "0.0.0.0"
+] + getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "0.0.0.0"
+]
 
 
 # Application definition
@@ -90,9 +104,6 @@ TEMPLATES = [
     },
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
 WSGI_APPLICATION = 'megano.wsgi.application'
 
@@ -103,7 +114,7 @@ WSGI_APPLICATION = 'megano.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DATABASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -155,10 +166,30 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    # 'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #         'rest_framework.permissions.IsAuthenticated',
-    #     ]
-
 }
+
+LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
+logging.config.dictConfig({
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "%(ascitime)s %(levelname)s"
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "console",
+        },
+    },
+    "loggers": {
+        "": {
+            "level": LOGLEVEL,
+            "handlers": [
+                "console",
+            ],
+        },
+    },
+})
