@@ -9,15 +9,17 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from os import getenv
 from pathlib import Path
 import logging.config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Путь к проекту
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATABASE_DIR = BASE_DIR / "database"
-DATABASE_DIR.mkdir(exist_ok=True)
+
+# Путь к базе данных
+# DATABASE_DIR = BASE_DIR / "database"
+# DATABASE_DIR.mkdir(exist_ok=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -28,8 +30,9 @@ SECRET_KEY = getenv(
     'django-insecure-=8=*-!wo1%wd8w8qn%a#unnh$6yu0e894c9-1fgzkkcnu7$e*u'
 )
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("DJANGO_DEBUG", 0) == 1
+# ПРЕДУПРЕЖДЕНИЕ О БЕЗОПАСНОСТИ: не запускайте с включенной отладкой в рабочей среде!
+# DEBUG = getenv("DJANGO_DEBUG", 0) == 1  # режим продакшн
+DEBUG = True  # режим отладки (DEBUG)
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -111,16 +114,17 @@ WSGI_APPLICATION = 'megano.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# База данных по умолчанию
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': DATABASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # для DEBUG
+        # 'NAME': DATABASE_DIR / 'db.sqlite3',  для продакшн
     }
 }
 
 
-
-# Password validation
+# Парольная валидация
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -154,7 +158,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'frontend'),
+#     os.path.join(BASE_DIR, 'static'),
+#     # путь к другим статическим файлам, если они есть
+# ]
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
@@ -163,19 +177,20 @@ MEDIA_ROOT = BASE_DIR / 'uploads'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Настройки для rest_framework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
+# Настройки для логгирования
+LOGLEVEL = getenv("DJANGO_LOGLEVEL", "INFO").upper()
 logging.config.dictConfig({
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
         "console": {
-            "format": "%(ascitime)s %(levelname)s"
+            "format": "%(asctime)s %(levelname)s [%(name)s:%(lineno)s] %(module)s %(message)s"
         },
     },
     "handlers": {

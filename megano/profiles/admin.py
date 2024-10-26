@@ -34,6 +34,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     def get_avatar(self, obj: UserProfile):
         avatar = UserAvatar.objects.get(user_profile=obj)
-        if not avatar:
+        if not avatar.src:
             return f"No avatar"
-        return mark_safe(f'<img src={avatar.src.url}>')
+        else:
+            return mark_safe(f'<img src={avatar.src.url}>')

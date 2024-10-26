@@ -20,9 +20,6 @@ def creat_basket_products(user_basket: Cart) -> list[Cart]:
         product = Product.objects.all().get(pk=prod_value["product_pk"])
         # указываем, какое кол-во товара
         product.count = prod_value["quantity"]
-        # if product.count > 0:
-        #     # указываем общую стоимость позиции товара исходя из кол-ва товаров
-        #     product.price = product.count * product.price
 
         # добавляем товар в список
         basket_products.append(product)

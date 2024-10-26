@@ -68,6 +68,7 @@ class UserRegisterApiView(APIView):
                 first_name=serializer.validated_data["first_name"],
                 password=serializer.validated_data["password"]
             )
+
             user_profile = UserProfile.objects.create(user=user)
             UserAvatar.objects.create(user=user, user_profile=user_profile)
             group = Group.objects.get(name="authorized_user")

@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 
 from basket.basket import Cart
 from order.models import Order, OrderItem
-from order.serializers import OrderSerializer, OrderDetailsSerializer
+from order.serializers import OrderDetailsSerializer
 from product.models import Product
 
 

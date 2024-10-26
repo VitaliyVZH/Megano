@@ -5,12 +5,14 @@ services:
     build:
       dockerfile: ./Dockerfile
     command:
-      - "gunicorn"
-      - "megano.wsgi:application"
-      - "--bind"
-      - "0.0.0.0:8000"
-    ports:
-      - "8000:8000"
+      - gunicorn
+      - -c
+      - gunicorn.conf.py
+      - --chdir
+      - /app
+      - --workers=3
+      - --bind=unix:/run/gunicorn.sock
+      - megano.wsgi:application
     restart: always
     env_file:
       - .env
@@ -21,3 +23,55 @@ services:
         max-size: "200k"
     volumes:
       - ./megano/database:/app/database
+      - ./staticfiles:/var/www/static
+      - ./app.sock:/run/gunicorn.sock
+
+  nginx:
+    image: nginx:stable
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./staticfiles:/var/www/static
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./app.sock:/run/gunicorn.sock:ro
+    depends_on:
+      - app
+    working_dir: /var/www/html
+
+
+#version: "3.9"
+#
+#services:
+#  web:
+#    build: .
+#    command: ["nginx", "-g", "daemon on;"]
+#    volumes:
+#      - ./megano/database:/app/megano/database
+#      - ./staticfiles:/var/www/static
+#      - ./nginx/conf.d:/etc/nginx/conf.d
+#    ports:
+#      - "8000:80"
+#    restart: always
+#    env_file:
+#      - .env
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-file: "10"
+#        max-size: "200k"
+#
+#  gunicorn:
+#    build: .
+#    command: ["gunicorn", "-c", "/app/gunicorn.conf.py", "--chdir", "/app", "--workers=3", "--bind=unix:/run/gunicorn.sock", "megano.wsgi:application"]
+#    volumes:
+#      - ./megano/database:/app/megano/database
+#      - ./staticfiles:/var/www/static
+#      - ./nginx/conf.d:/etc/nginx/conf.d
+#    restart: always
+#    env_file:
+#      - .env
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-file: "10"
+#        max-size: "200k"
