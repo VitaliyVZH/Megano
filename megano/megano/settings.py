@@ -79,6 +79,7 @@ BASKET_SESSION_ID = 'basket.apps.BasketConfig'
 
 
 MIDDLEWARE = [
+    # 'django.middleware.cache.UpdateCacheMiddleware',  # кэширование любой страницы
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # 'django.middleware.cache.FetchFromCacheMiddleware',  # кэширование любой страницы
 ]
 
 ROOT_URLCONF = 'megano.urls'
@@ -123,6 +125,16 @@ DATABASES = {
     }
 }
 
+# Настройки кэширования
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "../cache",
+    }
+}
+
+# кэширование всего сайта на ... секунд
+CACHE_MIDDLEWARE_SECONDS = 25
 
 # Парольная валидация
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
