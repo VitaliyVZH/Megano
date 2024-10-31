@@ -1,0 +1,842 @@
+[
+  {
+    "model": "auth.group",
+    "fields": {
+      "name": "authorized_user",
+      "permissions": [
+        [
+          "add_contenttype",
+          "contenttypes",
+          "contenttype"
+        ],
+        [
+          "change_contenttype",
+          "contenttypes",
+          "contenttype"
+        ],
+        [
+          "delete_contenttype",
+          "contenttypes",
+          "contenttype"
+        ],
+        [
+          "view_contenttype",
+          "contenttypes",
+          "contenttype"
+        ],
+        [
+          "add_order",
+          "order",
+          "order"
+        ],
+        [
+          "change_order",
+          "order",
+          "order"
+        ],
+        [
+          "delete_order",
+          "order",
+          "order"
+        ],
+        [
+          "view_order",
+          "order",
+          "order"
+        ],
+        [
+          "add_orderitem",
+          "order",
+          "orderitem"
+        ],
+        [
+          "change_orderitem",
+          "order",
+          "orderitem"
+        ],
+        [
+          "delete_orderitem",
+          "order",
+          "orderitem"
+        ],
+        [
+          "view_orderitem",
+          "order",
+          "orderitem"
+        ],
+        [
+          "add_payment",
+          "payment",
+          "payment"
+        ],
+        [
+          "change_payment",
+          "payment",
+          "payment"
+        ],
+        [
+          "delete_payment",
+          "payment",
+          "payment"
+        ],
+        [
+          "view_payment",
+          "payment",
+          "payment"
+        ],
+        [
+          "add_reviews",
+          "product",
+          "reviews"
+        ],
+        [
+          "change_reviews",
+          "product",
+          "reviews"
+        ],
+        [
+          "delete_reviews",
+          "product",
+          "reviews"
+        ],
+        [
+          "view_reviews",
+          "product",
+          "reviews"
+        ],
+        [
+          "add_tag",
+          "product",
+          "tag"
+        ],
+        [
+          "change_tag",
+          "product",
+          "tag"
+        ],
+        [
+          "delete_tag",
+          "product",
+          "tag"
+        ],
+        [
+          "view_tag",
+          "product",
+          "tag"
+        ],
+        [
+          "add_useravatar",
+          "profiles",
+          "useravatar"
+        ],
+        [
+          "change_useravatar",
+          "profiles",
+          "useravatar"
+        ],
+        [
+          "delete_useravatar",
+          "profiles",
+          "useravatar"
+        ],
+        [
+          "view_useravatar",
+          "profiles",
+          "useravatar"
+        ],
+        [
+          "add_userprofile",
+          "profiles",
+          "userprofile"
+        ],
+        [
+          "change_userprofile",
+          "profiles",
+          "userprofile"
+        ],
+        [
+          "delete_userprofile",
+          "profiles",
+          "userprofile"
+        ],
+        [
+          "view_userprofile",
+          "profiles",
+          "userprofile"
+        ]
+      ]
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "password": "pbkdf2_sha256$870000$4jAacyOMCzAP0QvHmDnRTh$pS1jSUhem92BBJvE+GRBtbvDuodgTq5Tk103fRyDlxI=",
+      "last_login": "2024-10-31T19:33:04.528Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-31T06:11:20.056Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+      "password": "pbkdf2_sha256$870000$BGyQt5WgQzBiF3hNPKI4Rg$BgZ2VPX+Yv61ZOrYtL35obbzAfQBc+RzYjIFFWFmImI=",
+      "last_login": "2024-10-31T19:47:06.564Z",
+      "is_superuser": false,
+      "username": "Cris",
+      "first_name": "Cris",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-31T19:47:04.881Z",
+      "groups": [
+        [
+          "authorized_user"
+        ]
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "adrzrez46ftguzmdnmkptoh594n5tu54",
+    "fields": {
+      "session_data": ".eJxVjDsOgzAQRO_iOrJswxqHktQ5A9r1BwiRjTBUiLsHIoqkG817MxtrcV36ds1-bgfHagbs9tsR2tHHE7gXxi5xm-IyD8RPhV8082dy_t1c7t9Bj7k_1hZLbbAyd9CgRABCQz5AKUBLIaV2WpE2XhqohFJFQcbrAxe2CopMwOOUMI9-4ThNmTff_EgxDB2rt33_ANkjQfg:1t6b8V:dNKwEf4k_qQrM0bMcDGq-cZaicJ0G952o5eGz9rt5Eo",
+      "expire_date": "2024-11-14T19:47:15.305Z"
+    }
+  },
+  {
+    "model": "profiles.userprofile",
+    "pk": 3,
+    "fields": {
+      "fullName": "Cris Asm",
+      "phone": "89293317714",
+      "email": "cris@g.com",
+      "user": [
+        "Cris"
+      ]
+    }
+  },
+  {
+    "model": "profiles.useravatar",
+    "pk": 3,
+    "fields": {
+      "src": "image_user/user_5/cat2.jpg",
+      "alt": "cat2",
+      "user": [
+        "Cris"
+      ],
+      "user_profile": 3
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 1,
+    "fields": {
+      "title": "Smartphone Samsung Galaxy S24 Ultra 12/256GB Marbl",
+      "price": "150.00",
+      "category": 4,
+      "count": 71,
+      "date": "2024-10-31T17:51:07.930Z",
+      "description": "The Samsung Galaxy S24 Ultra 12/256GB Marble Gray smartphone is equipped with Galaxy AI artificial intelligence, which allows you to quickly find any objects from pictures in Google search, easily move objects in photos and translate speech into the desired language during a phone conversation. The model is equipped with a durable titanium frame that is resistant to impacts. Tempered glass protect",
+      "fullDescription": "The Samsung Galaxy S24 Ultra 12/256GB Marble Gray smartphone is equipped with Galaxy AI artificial intelligence, which allows you to quickly find any objects from pictures in Google search, easily move objects in photos and translate speech into the desired language during a phone conversation. The model is equipped with a durable titanium frame that is resistant to impacts. Tempered glass protects the screen from scratches. The device can be immersed in water to a depth of 1.5 m thanks to IP68 dust and moisture protection.",
+      "freeDelivery": true,
+      "rating": "0.0",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 2,
+    "fields": {
+      "title": "Smartphone Samsung Galaxy S23 8/128GB Green (SM-S9",
+      "price": "91.00",
+      "category": 4,
+      "count": 8,
+      "date": "2024-10-31T18:06:08.830Z",
+      "description": "The Samsung Galaxy S23 Green (SM-S911/DS) smartphone is a model with a 6.1-inch frameless screen made using Dynamic AMOLED 2X technology. The resolution is 2400x1080 pixels, the refresh rate is 120 Hz. 16 million colors are displayed. Corning Gorilla Glass 8 provides reliable protection for the display. The high performance of the device is guaranteed by the eight-core Qualcomm Snapdragon 8 Gen 2",
+      "fullDescription": "The Samsung Galaxy S23 Green (SM-S911/DS) smartphone is a model with a 6.1-inch frameless screen made using Dynamic AMOLED 2X technology. The resolution is 2400x1080 pixels, the refresh rate is 120 Hz. 16 million colors are displayed. Corning Gorilla Glass 8 provides reliable protection for the display. The high performance of the device is guaranteed by the eight-core Qualcomm Snapdragon 8 Gen 2 processor and 8 GB of RAM. A storage of 128 GB is used to install applications, store images, music, videos and documents.",
+      "freeDelivery": true,
+      "rating": "0.0",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 3,
+    "fields": {
+      "title": "Smartphone Apple iPhone 16 Pro 256GB nanoSim/eSim",
+      "price": "253.00",
+      "category": 5,
+      "count": 35,
+      "date": "2024-10-31T18:10:15.809Z",
+      "description": "The Apple iPhone 16 Pro nanoSim/eSim Desert Titanium smartphone has a 6.3-inch display with a resolution of 1206x2622 pixels, made using Super Retina XDR technology, which is distinguished by the highest accuracy of color rendering.  Х Six-core A18 Pro processor Made using a three-nanometer process technology, provides high performance and energy efficiency.  Х 256 GB of internal memory Allows you",
+      "fullDescription": "The Apple iPhone 16 Pro nanoSim/eSim Desert Titanium smartphone has a 6.3-inch display with a resolution of 1206x2622 pixels, made using Super Retina XDR technology, which is distinguished by the highest accuracy of color rendering.  Х Six-core A18 Pro processor Made using a three-nanometer process technology, provides high performance and energy efficiency.  Х 256 GB of internal memory Allows you to install the necessary applications and store a significant number of photos, videos, music, and various documents.",
+      "freeDelivery": true,
+      "rating": "0.0",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 4,
+    "fields": {
+      "title": "Smartphone Apple iPhone 13 128GB nanoSim/eSim Star",
+      "price": "159.00",
+      "category": 5,
+      "count": 11,
+      "date": "2024-10-31T18:17:50.839Z",
+      "description": "This model may have been pre-activated. It is brand new and has not been linked to an Apple ID account. Please note that the information above does not affect the consumer characteristics, functionality, or warranty of M.Video.  iPhone 13. The mightiest of all.  iPhone 13. The most advanced dual-camera system on an iPhone. Cinematic Effect mode turns video into a real movie. Super-fast A15 Bionic",
+      "fullDescription": "This model may have been pre-activated. It is brand new and has not been linked to an Apple ID account. Please note that the information above does not affect the consumer characteristics, functionality, or warranty of M.Video.  iPhone 13. The mightiest of all.  iPhone 13. The most advanced dual-camera system on an iPhone. Cinematic Effect mode turns video into a real movie. Super-fast A15 Bionic chip. Tireless battery. Durable body. And an even brighter Super Retina XDR display.",
+      "freeDelivery": true,
+      "rating": "0.0",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 5,
+    "fields": {
+      "title": "Mobile phone F+ F170L",
+      "price": "29.00",
+      "category": 2,
+      "count": 5,
+      "date": "2024-10-31T18:22:01.680Z",
+      "description": "The F+ F170L mobile phone has a 1.77-inch TFT color screen. The keys are large and backlit. The resolution is 160x128 pixels. The SC8955 processor is at the core of the phone. The built-in and RAM memory is 32 MB each. There are slots for installing two SIM cards. The 2G standard is supported in wireless networks. The case type is a monoblock, the material is plastic. There is a built-in flashligh",
+      "fullDescription": "The F+ F170L mobile phone has a 1.77-inch TFT color screen. The keys are large and backlit. The resolution is 160x128 pixels. The SC8955 processor is at the core of the phone. The built-in and RAM memory is 32 MB each. There are slots for installing two SIM cards. The 2G standard is supported in wireless networks. The case type is a monoblock, the material is plastic. There is a built-in flashlight.  The phone has an FM receiver, vibration alert, and alarm clock. You can set MP3 as a ringtone. During a conversation, you can switch to speakerphone mode. It is possible to install a microSDHC memory card - up to 32 GB.  The organizer is represented by a calendar, calculator, date / time. Connectors - microUSB and 3.5 mm for connecting a headset. The power source is a lithium-ion battery with a capacity of 600 mAh. Time",
+      "freeDelivery": false,
+      "rating": "0.0",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 6,
+    "fields": {
+      "title": "Mobile phone teXet TM-B226 Black/Red",
+      "price": "55.00",
+      "category": 2,
+      "count": 12,
+      "date": "2024-10-31T18:27:18.361Z",
+      "description": "The teXet TM-B226 mobile phone is equipped with an enlarged keyboard, allowing you to accurately dial a number by touch. Its buttons have large symbols in a contrasting white color, clearly visible even in low light.  SOS FUNCTION  The device will help you call for help in an emergency. To do this, simply press the button on the back of the case.",
+      "fullDescription": "The teXet TM-B226 mobile phone is equipped with an enlarged keyboard, allowing you to accurately dial a number by touch. Its buttons have large symbols in a contrasting white color, clearly visible even in low light.  SOS FUNCTION  The device will help you call for help in an emergency. To do this, simply press the button on the back of the case.",
+      "freeDelivery": true,
+      "rating": "0.0",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "product.productimage",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "src": "products/product_1/images/Smartphone-Samsung-Galaxy-S24-Ultra.jpeg",
+      "alt": "Smartphone Samsung Galaxy S24 Ultra"
+    }
+  },
+  {
+    "model": "product.productimage",
+    "pk": 2,
+    "fields": {
+      "product": 2,
+      "src": "products/product_2/images/Smartphone-Samsung-Galaxy-S23.jpeg",
+      "alt": "Smartphone Samsung Galaxy S23"
+    }
+  },
+  {
+    "model": "product.productimage",
+    "pk": 3,
+    "fields": {
+      "product": 3,
+      "src": "products/product_3/images/Smartphone-Apple-iPhone-16-Pro.jpeg",
+      "alt": "Apple iPhone 16"
+    }
+  },
+  {
+    "model": "product.productimage",
+    "pk": 4,
+    "fields": {
+      "product": 4,
+      "src": "products/product_4/images/Smartphone-Apple-iPhone-13-128GB.jpeg",
+      "alt": "Smartphone Apple iPhone 13 128GB"
+    }
+  },
+  {
+    "model": "product.productimage",
+    "pk": 5,
+    "fields": {
+      "product": 5,
+      "src": "products/product_5/images/Mobile-phone-F-F170L.jpg",
+      "alt": "Mobile phone F+ F170L"
+    }
+  },
+  {
+    "model": "product.productimage",
+    "pk": 6,
+    "fields": {
+      "product": 6,
+      "src": "products/product_6/images/Mobile-phone-teXet-TM-B226.jpeg",
+      "alt": "Mobile phone teXet TM-B226"
+    }
+  },
+  {
+    "model": "product.tag",
+    "pk": 1,
+    "fields": {
+      "name": "BEST"
+    }
+  },
+  {
+    "model": "product.reviews",
+    "pk": 1,
+    "fields": {
+      "reviewer": [
+        "admin"
+      ],
+      "author": "Vytaliy",
+      "product": 1,
+      "email": "jilyaev1987@yandex.ru",
+      "text": "Pros\r\nPowerful. Beautiful\r\nCons\r\nWhen buying, they promised headphones as a gift, but since they were not available, they said you can get by with one phone)\r\nReview\r\nI switched to it from the S10, so I felt a good difference. Artificial intelligence is more of a pampering and is not often needed in fact. The charge lasts a long time.",
+      "rate": 4,
+      "date": "2024-10-31T17:58:54.642Z"
+    }
+  },
+  {
+    "model": "product.reviews",
+    "pk": 2,
+    "fields": {
+      "reviewer": [
+        "admin"
+      ],
+      "author": "Vytaliy",
+      "product": 2,
+      "email": "jilyaev1987@yandex.ru",
+      "text": "Pros\r\nConvenient, good performance, holds a charge for a long time, stylish.\r\n\r\nComment\r\nThe phone is cool, I really liked it. Holds a charge all day with intensive use. Light, convenient. Thinks quickly))). Good camera.",
+      "rate": 4,
+      "date": "2024-10-31T18:06:08.854Z"
+    }
+  },
+  {
+    "model": "product.reviews",
+    "pk": 3,
+    "fields": {
+      "reviewer": [
+        "admin"
+      ],
+      "author": "Vytaliy",
+      "product": 3,
+      "email": "jilyaev1987@yandex.ru",
+      "text": "Pros\r\nCool design, performance, camera\r\n\r\nCons\r\nnone\r\n\r\nComment\r\nI bought a new model as a gift for my girlfriend. Cool design, very beautiful color. The screen is amazing, the colors are bright and saturated, you can watch videos one",
+      "rate": 4,
+      "date": "2024-10-31T18:10:15.903Z"
+    }
+  },
+  {
+    "model": "product.reviews",
+    "pk": 4,
+    "fields": {
+      "reviewer": [
+        "admin"
+      ],
+      "author": "Vytaliy",
+      "product": 4,
+      "email": "jilyaev1987@yandex.ru",
+      "text": "Pros\r\nStylish Fashionable Youthful\r\nCons\r\nIt turns out that Apple overprices\r\nReview\r\nThe wow effect disappeared after about an hour of work and, in general, maybe because I bought good Android gadgets before the iPhone, or I'm getting old, but there is nothing like that: a smart as a smart, fast, beautiful, good, user-friendly interface, but nothing special. I would not recommend switching to another OS for those who own powerful modern gadgets, you are unlikely to feel that same Apple magic",
+      "rate": 4,
+      "date": "2024-10-31T18:17:50.844Z"
+    }
+  },
+  {
+    "model": "product.reviews",
+    "pk": 5,
+    "fields": {
+      "reviewer": [
+        "admin"
+      ],
+      "author": "Vytaliy",
+      "product": 5,
+      "email": "jilyaev1987@yandex.ru",
+      "text": "Pros\r\nFor two SIM cards\r\n\r\nCons\r\nNone\r\n\r\nComment\r\nA dialer is a dialer even in Africa. You won't find a better device on a construction site. No problems with calls/texts. And I don't require anything else from it. It fits compactly in your pocket, even if something happens I won't feel sorry - I'll buy a new one. Everything is clear about the device, it works. I recommend it.",
+      "rate": 4,
+      "date": "2024-10-31T18:22:01.743Z"
+    }
+  },
+  {
+    "model": "product.reviews",
+    "pk": 6,
+    "fields": {
+      "reviewer": [
+        "admin"
+      ],
+      "author": "Vytaliy",
+      "product": 6,
+      "email": "jilyaev1987@yandex.ru",
+      "text": "Pros\r\nLarge buttons and screen!\r\n\r\nCons\r\nNone yet!\r\n\r\nComment\r\nA good phone for older people. Everything is clear and functional.",
+      "rate": 4,
+      "date": "2024-10-31T18:27:18.399Z"
+    }
+  },
+  {
+    "model": "product.specifications",
+    "pk": 1,
+    "fields": {
+      "name": "Smartphone Samsung Galaxy S24 Ultra",
+      "value": "S24 Ultra",
+      "specifications": 1
+    }
+  },
+  {
+    "model": "product.specifications",
+    "pk": 2,
+    "fields": {
+      "name": "Smartphone Samsung Galaxy S23",
+      "value": "8/128GB",
+      "specifications": 2
+    }
+  },
+  {
+    "model": "product.specifications",
+    "pk": 3,
+    "fields": {
+      "name": "Smartphone Apple iPhone 16 Pro 256GB",
+      "value": "256GB",
+      "specifications": 3
+    }
+  },
+  {
+    "model": "product.specifications",
+    "pk": 4,
+    "fields": {
+      "name": "Smartphone Apple iPhone 13",
+      "value": "128GB nano",
+      "specifications": 4
+    }
+  },
+  {
+    "model": "product.specifications",
+    "pk": 5,
+    "fields": {
+      "name": "Mobile phone F+ F170L",
+      "value": "F170L",
+      "specifications": 5
+    }
+  },
+  {
+    "model": "product.specifications",
+    "pk": 6,
+    "fields": {
+      "name": "Mobile phone teXet TM-B226",
+      "value": "TM-B226 Bl",
+      "specifications": 6
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 1,
+    "fields": {
+      "title": "Phones",
+      "image": "categories/Phones/Push-button_and_smart_phones.jpg",
+      "parent_category": null
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 2,
+    "fields": {
+      "title": "Push-button telephone",
+      "image": "categories/Push-button telephone/Push-button_telephones.webp",
+      "parent_category": 1
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 3,
+    "fields": {
+      "title": "Smartphones",
+      "image": "categories/Smartphones/Smartphones.webp",
+      "parent_category": 1
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 4,
+    "fields": {
+      "title": "Samsung",
+      "image": "categories/Samsung/Samsung.jpg",
+      "parent_category": 3
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 5,
+    "fields": {
+      "title": "Apple",
+      "image": "categories/Apple/iPhone.jpg",
+      "parent_category": 3
+    }
+  },
+  {
+    "model": "sale.productsale",
+    "pk": 1,
+    "fields": {
+      "salePrice": "33.00",
+      "dateFrom": "2024-10-31",
+      "dateTo": "2024-11-01",
+      "product": 4
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2024-10-31T06:14:33.895Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "category"
+      ],
+      "object_id": "1",
+      "object_repr": "#1. Phones",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2024-10-31T17:37:40.285Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "category"
+      ],
+      "object_id": "2",
+      "object_repr": "#2. Push-button telephone",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2024-10-31T17:39:24.564Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "category"
+      ],
+      "object_id": "3",
+      "object_repr": "#3. Smartphones",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2024-10-31T17:40:19.159Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "category"
+      ],
+      "object_id": "4",
+      "object_repr": "#4. Samsung",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2024-10-31T17:40:46.262Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "category"
+      ],
+      "object_id": "5",
+      "object_repr": "#5. Apple",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2024-10-31T17:51:07.975Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "1",
+      "object_repr": "#1. Smartphone Samsung Galaxy S24 Ultra 12/256GB Marbl",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"product image\", \"object\": \"Product photo: Smartphone Samsung Galaxy S24 Ultra 12/256GB Marbl\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2024-10-31T17:55:15.522Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "tag"
+      ],
+      "object_id": "1",
+      "object_repr": "BEST",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"product-tag relationship\", \"object\": \"Product_tags object (1)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2024-10-31T17:58:54.645Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "1",
+      "object_repr": "#1. Smartphone Samsung Galaxy S24 Ultra 12/256GB Marbl",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"specifications\", \"object\": \"Specifications object (1)\"}}, {\"added\": {\"name\": \"reviews\", \"object\": \"Review from user Vytaliy about the #1. Smartphone Samsung Galaxy S24 Ultra 12/256GB Marbl\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2024-10-31T18:06:08.863Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "2",
+      "object_repr": "#2. Smartphone Samsung Galaxy S23 8/128GB Green (SM-S9",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"specifications\", \"object\": \"Specifications object (2)\"}}, {\"added\": {\"name\": \"reviews\", \"object\": \"Review from user Vytaliy about the #2. Smartphone Samsung Galaxy S23 8/128GB Green (SM-S9\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Product photo: Smartphone Samsung Galaxy S23 8/128GB Green (SM-S9\"}}, {\"added\": {\"name\": \"product-tag relationship\", \"object\": \"Product_tags object (3)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2024-10-31T18:10:15.939Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "3",
+      "object_repr": "#3. Smartphone Apple iPhone 16 Pro 256GB nanoSim/eSim",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"specifications\", \"object\": \"Specifications object (3)\"}}, {\"added\": {\"name\": \"reviews\", \"object\": \"Review from user Vytaliy about the #3. Smartphone Apple iPhone 16 Pro 256GB nanoSim/eSim\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Product photo: Smartphone Apple iPhone 16 Pro 256GB nanoSim/eSim\"}}, {\"added\": {\"name\": \"product-tag relationship\", \"object\": \"Product_tags object (4)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2024-10-31T18:17:50.857Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "4",
+      "object_repr": "#4. Smartphone Apple iPhone 13 128GB nanoSim/eSim Star",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"specifications\", \"object\": \"Specifications object (4)\"}}, {\"added\": {\"name\": \"reviews\", \"object\": \"Review from user Vytaliy about the #4. Smartphone Apple iPhone 13 128GB nanoSim/eSim Star\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Product photo: Smartphone Apple iPhone 13 128GB nanoSim/eSim Star\"}}, {\"added\": {\"name\": \"product-tag relationship\", \"object\": \"Product_tags object (5)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+      "action_time": "2024-10-31T18:22:01.755Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "5",
+      "object_repr": "#5. Mobile phone F+ F170L",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"specifications\", \"object\": \"Specifications object (5)\"}}, {\"added\": {\"name\": \"reviews\", \"object\": \"Review from user Vytaliy about the #5. Mobile phone F+ F170L\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Product photo: Mobile phone F+ F170L\"}}, {\"added\": {\"name\": \"product-tag relationship\", \"object\": \"Product_tags object (6)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+      "action_time": "2024-10-31T18:27:18.410Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "product",
+        "product"
+      ],
+      "object_id": "6",
+      "object_repr": "#6. Mobile phone teXet TM-B226 Black/Red",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"specifications\", \"object\": \"Specifications object (6)\"}}, {\"added\": {\"name\": \"reviews\", \"object\": \"Review from user Vytaliy about the #6. Mobile phone teXet TM-B226 Black/Red\"}}, {\"added\": {\"name\": \"product image\", \"object\": \"Product photo: Mobile phone teXet TM-B226 Black/Red\"}}, {\"added\": {\"name\": \"product-tag relationship\", \"object\": \"Product_tags object (7)\"}}]"
+    }
+  }
+]
