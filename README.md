@@ -90,24 +90,24 @@
     <p>pip install Megano/diploma-frontend/dist/diploma-frontend-0.6.tar.gz</p>
 </li>
     
-    <li>Установите poetry (контроль зависимостей)
-    <p>pip install poetry</p>
+<li>Установите poetry (контроль зависимостей)
+<p>pip install poetry</p>
 </li>
-    <li>Установите зависимости проекта:
-    <p>poetry install</p>
+<li>Установите зависимости проекта:
+<p>poetry install</p>
 </li>
-    <li>Перейдите в подкаталог megano:
-    <p>cd megano</p>
+<li>Перейдите в подкаталог megano:
+<p>cd megano</p>
 </li>
-    <li>Примените миграции базы данных:
-    <p>python manage.py migrate</p>
+<li>Примените миграции базы данных:
+<p>python manage.py migrate</p>
 </li>
-    <li>Загрузите фикстуры для тестового просмотра сайта:
-    <p>python manage.py loaddata all_data.json</p>
-    В результате, БД наполнится ограниченным колличеством данных, включая профиль администратора.
+<li>Загрузите фикстуры для тестового просмотра сайта:
+<p>python manage.py loaddata all_data.json</p>
+В результате, БД наполнится ограниченным колличеством данных, включая профиль администратора.
 </li>
-    <li>Запустите проект:
-    <p>python manage.py runserver</p>
+<li>Запустите проект:
+<p>python manage.py runserver</p>
 </li>
 </ol>
 
