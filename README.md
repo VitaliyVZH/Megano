@@ -67,7 +67,7 @@
         <p>pip install python_django_diploma/diploma-frontend/dist/diploma-frontend-0.6.tar.gz</p>
     </li>
     <li>Перейдите в каталог проекта:
-    <p>cd python_django_diploma</p>
+    <p>cd Megano</p>
 </li>
     <li>Создайте и активируйте виртуальное окружение:
     <p>python -m venv venv</p>
