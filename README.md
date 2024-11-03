@@ -77,7 +77,7 @@
     </li>
     <li>
         Установите приложение "frontend":
-        <p>pip install python_django_diploma/diploma-frontend/dist/diploma-frontend-0.6.tar.gz</p>
+        <p>pip install Megano/diploma-frontend/dist/diploma-frontend-0.6.tar.gz</p>
     </li>
     <li>Перейдите в каталог проекта:
     <p>cd Megano</p>
