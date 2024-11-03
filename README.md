@@ -75,17 +75,21 @@
         Клонируйте репозиторий с проектом:
         <p>git clone https://github.com/VitaliyVZH/Megano.git</p>
     </li>
+
+    <li>Перейдите в каталог проекта:
+    <p>cd Megano</p>
+  </li>
+
+  <li>Создайте и активируйте виртуальное окружение:
+      <p>python -m venv venv</p>
+      <p>source venv/bin/activate  # на Windows: venv\Scripts\activate</p>
+  </li>
+
     <li>
         Установите приложение "frontend":
         <p>pip install Megano/diploma-frontend/dist/diploma-frontend-0.6.tar.gz</p>
     </li>
-    <li>Перейдите в каталог проекта:
-    <p>cd Megano</p>
-</li>
-    <li>Создайте и активируйте виртуальное окружение:
-    <p>python -m venv venv</p>
-    <p>source venv/bin/activate  # на Windows: venv\Scripts\activate</p>
-</li>
+    
     <li>Установите poetry (контроль зависимостей)
     <p>pip install poetry</p>
 </li>
