@@ -1,18 +1,30 @@
 <h1 style="display: flex; align-items: center; justify-content: center">Интернет-магазин MEGANO</h1>
 <img src="./img_for_README/Megano_1.png" alt="Картинка сайта">
-<h2 style="display: flex; align-items: center; justify-content: center">
+
+<nav>
+  <h2>Оглавление</h2>
+  <ul>
+    <li><a href="#Описание">Описание проекта</a></li>
+    <li><a href="#Функциональность">Функциональность</a></li>
+    <li><a href="#Технологии">Технологии</a></li>
+    <li><a href="#Установка и запуск">Установка и запуск</a></li>
+    <li><a href="#Использование">Использование</a></li>
+  </ul>
+</nav>
+
+<h2 id="Описание" style="display: flex; align-items: center; justify-content: center">
 Описание проекта
 </h2>
 <div>
     <p>
-        Megano — это интернет магазин на основе фреймворка Django.
+        Megano — это веб-приложение на Django, которое позволяет пользователям создавать и управлять своими списками покупок. Пользователи могут добавлять продукты, маркировать их как купленные и удалять их из списка.
         Фронтенд и Бэкенд в данном проекте являются отдельными приложениями и взаимодействуют между собой 
         через API используя Django Rest Framework.
     </p>
 </div>
 
 
-<h2 style="display: flex; align-items: center; justify-content: center">
+<h2 id="Функциональность">
 Функциональность
 </h2>
 
@@ -29,7 +41,7 @@
 
 </ul>
 
-<h2 style="display: flex; align-items: center; justify-content: center">
+<h2 id="Технологии">
     Технологии
 </h2>
 
@@ -43,7 +55,7 @@
 </ul>
 
 
-<h2 style="display: flex; align-items: center; justify-content: center">
+<h2 id="Установка и запуск">
     Установка и запуск
 </h2>
 
@@ -53,6 +65,7 @@
 <ul>
     <li>Python (3.8 или выше)</li>
     <li>Django (3.2.7 или выше)</li>
+    <li>pip</li>
 </ul>
 
 <p>Для установки и запуска Megano следуйте приведенным ниже инструкциям:</p>
@@ -94,7 +107,7 @@
 </li>
 </ol>
 
-<h2 style="display: flex; align-items: center; justify-content: center">Использование</h2>
+<h2 id="Использование">Использование</h2>
 
 <h3>Регистрация и аутентификация пользователей</h3>
 <div>
@@ -130,4 +143,4 @@
 
 <h3>Оплата заказа</h3>
 <img src="./img_for_README/payment.png" alt="Оплата заказа">
-<p>Ввод реквезитов карты http://127.0.0.1:8000/payment/num_orders </p>                     
+<p>Ввод реквизитов карты http://127.0.0.1:8000/payment/num_orders </p>                     
